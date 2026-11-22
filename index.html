@@ -7,7 +7,7 @@
 body{margin:0;font-family:Arial;background:#111;color:#fff;text-align:center}
 header{padding:20px;background:linear-gradient(90deg,#ff0055,#ffaa00)}
 nav{display:flex;justify-content:center;gap:8px;padding:12px;background:#1a1a1a;position:sticky;top:0}
-nav button{padding:12px 16px;border:none;border-radius:25px;background:#ff0055;color:#fff;font-weight:bold;font-size:15px}
+nav button{padding:12px 14px;border:none;border-radius:25px;background:#ff0055;color:#fff;font-weight:bold}
 nav button.active{background:#fff;color:#000}
 .page{display:none;padding:20px}
 .page.show{display:block}
@@ -15,6 +15,9 @@ nav button.active{background:#fff;color:#000}
 input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:none;box-sizing:border-box}
 .btn{width:100%;padding:14px;background:#ff0055;color:#fff;border:none;border-radius:10px;font-weight:bold}
 audio{width:100%}
+.cover{width:100%;height:220px;object-fit:cover;border-radius:12px}
+.pfp{width:50px;height:50px;object-fit:cover;border-radius:50%;vertical-align:middle;margin-right:8px}
+label{font-size:13px;color:#ffaa00;font-weight:bold}
 </style>
 </head>
 <body>
@@ -24,36 +27,63 @@ audio{width:100%}
 <button id="b-artist" onclick="go('artist')">For Artists</button>
 <button id="b-admin" onclick="go('admin')">For Admin</button>
 </nav>
-<div id="fan" class="page show"><h2>🔥 For Fans</h2><div class="card"><h3>⭐ Song of the Week</h3><p><b>Skiljoewise - Aa Jesus</b></p><audio controls src="aa-jesus.mp3"></audio><p>If song show 0:00, mp3 never upload yet.</p></div></div>
-<div id="artist" class="page"><h2>🎤 For Artists</h2><div class="card"><h3>Upload Your Song</h3><input id="t" placeholder="Song Title"><input id="n" placeholder="Artist Name"><input type="file" id="f" accept="audio/*"><button class="btn" onclick="up()">Upload Song</button><p id="am"></p><div id="list"></div></div></div>
-<div id="admin" class="page"><h2>🔐 For Admin</h2><div class="card"><input type="password" id="p" placeholder="Password - try 1234"><button class="btn" onclick="un()">Unlock Dashboard</button><p id="pm"></p><div id="ap" style="display:none"><p>✅ Dashboard Opened!</p></div></div></div>
+
+<div id="fan" class="page show"><h2>🔥 For Fans</h2>
+<div class="card"><img class="cover" src="https://via.placeholder.com/500x220?text=Aa+Jesus"><h3><img class="pfp" src="https://via.placeholder.com/100?text=S"> Skiljoewise - Aa Jesus</h3><audio controls src="aa-jesus.mp3"></audio></div>
+<div id="fanList"></div></div>
+
+<div id="artist" class="page"><h2>🎤 For Artists</h2><div class="card">
+<h3>Upload Your Song</h3>
+<input id="t" placeholder="Song Title">
+<input id="n" placeholder="Artist Name">
+<label>🎵 Song MP3</label><input type="file" id="f" accept="audio/*">
+<label>🖼️ Cover Picture - For Song</label><input type="file" id="cover" accept="image/*">
+<label>👤 Profile Picture - Your Face / Logo</label><input type="file" id="pfp" accept="image/*">
+<button class="btn" onclick="up()">Upload Song</button><p id="am"></p>
+<p style="font-size:13px;color:#ccc">Cover = picture wey go show big for song.<br>Profile = your face wey go show small round.</p>
+</div></div>
+
+<div id="admin" class="page"><h2>🔐 For Admin</h2><div class="card"><input type="password" id="p" placeholder="Password - 1234"><button class="btn" onclick="un()">Unlock Dashboard</button><p id="pm"></p><div id="ap" style="display:none"><h3>📋 Songs Waiting</h3><div id="adminList"></div></div></div></div>
+
 <script>
 function go(id){
-document.getElementById('fan').classList.remove('show');
-document.getElementById('artist').classList.remove('show');
-document.getElementById('admin').classList.remove('show');
+['fan','artist','admin'].forEach(x=>document.getElementById(x).classList.remove('show'));
 document.getElementById(id).classList.add('show');
-document.getElementById('b-fan').classList.remove('active');
-document.getElementById('b-artist').classList.remove('active');
-document.getElementById('b-admin').classList.remove('active');
+['fan','artist','admin'].forEach(x=>document.getElementById('b-'+x).classList.remove('active'));
 document.getElementById('b-'+id).classList.add('active');
-window.scrollTo(0,0);
+showFans();
 }
-function un(){
-var v=document.getElementById('p').value;
-if(v==='1234'||v==='Bmb@14700'){document.getElementById('ap').style.display='block';document.getElementById('pm').innerText='✅ Dashboard Opened!';}
-else{document.getElementById('pm').innerText='❌ Wrong password';alert('Wrong password, try 1234');}
-}
-function up(){
+function getSongs(){try{return JSON.parse(localStorage.getItem('afro_songs')||'[]')}catch(e){return []}}
+function saveSongs(s){localStorage.setItem('afro_songs',JSON.stringify(s))}
+function readFile(file){return new Promise(res=>{if(!file){res('');return;} var r=new FileReader(); r.onload=()=>res(r.result); r.readAsDataURL(file);})}
+async function up(){
 var t=document.getElementById('t').value;
 var n=document.getElementById('n').value;
 var file=document.getElementById('f').files[0];
 if(!t||!n){alert('Type Title and Artist Name');return;}
 if(!file){alert('Choose mp3 first');return;}
-var u=URL.createObjectURL(file);
-document.getElementById('list').innerHTML='<p><b>'+n+' - '+t+'</b></p><audio controls src="'+u+'"></audio>';
-document.getElementById('am').innerText='✅ Song Uploaded!';
+var songUrl=await readFile(file);
+var coverUrl=await readFile(document.getElementById('cover').files[0]);
+var pfpUrl=await readFile(document.getElementById('pfp').files[0]);
+var s=getSongs(); s.push({title:t,artist:n,url:songUrl,cover:coverUrl,pfp:pfpUrl,approved:false}); saveSongs(s);
+document.getElementById('am').innerText='✅ Sent to Admin! With Cover + Profile Picture.';
 }
+function un(){
+if(document.getElementById('p').value==='1234'){document.getElementById('ap').style.display='block';document.getElementById('pm').innerText='✅ Dashboard Opened!';showAdmin();}
+else{document.getElementById('pm').innerText='❌ Wrong password';}
+}
+function showAdmin(){
+var s=getSongs();
+if(s.length===0){document.getElementById('adminList').innerHTML='<p>No songs yet.</p>';return;}
+document.getElementById('adminList').innerHTML=s.map((song,i)=>'<div style="border:1px solid #333;padding:10px;border-radius:10px;margin:8px 0">'+(song.cover?'<img src="'+song.cover+'" style="width:100%;height:150px;object-fit:cover;border-radius:10px">':'')+'<p>'+(song.pfp?'<img src="'+song.pfp+'" style="width:40px;height:40px;border-radius:50%;object-fit:cover"> ':'')+'<b>'+song.artist+' - '+song.title+'</b> '+(song.approved?'✅ Approved':'⏳ Waiting')+'</p><audio controls src="'+song.url+'"></audio><br><button onclick="approve('+i+')" style="padding:8px 12px;margin:4px;background:green;color:#fff;border:none;border-radius:8px">Approve</button> <button onclick="delSong('+i+')" style="padding:8px 12px;background:red;color:#fff;border:none;border-radius:8px">Delete</button></div>').join('');
+}
+function approve(i){var s=getSongs(); s[i].approved=true; saveSongs(s); showAdmin(); alert('Approved! Now e go show for Fans with pictures.');}
+function delSong(i){var s=getSongs(); s.splice(i,1); saveSongs(s); showAdmin(); showFans();}
+function showFans(){
+var s=getSongs().filter(x=>x.approved);
+document.getElementById('fanList').innerHTML=s.map(x=>'<div class="card">'+(x.cover?'<img class="cover" src="'+x.cover+'">':'')+'<h3>'+(x.pfp?'<img class="pfp" src="'+x.pfp+'">':'')+x.artist+' - '+x.title+'</h3><audio controls src="'+x.url+'"></audio></div>').join('');
+}
+showFans();
 </script>
 </body>
 </html>
