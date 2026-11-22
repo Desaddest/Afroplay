@@ -1,26 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Afroplay - Watch African Movies</title>
+<title>Afroplay</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body{background:#0a0a0a;color:white;font-family:Arial;text-align:center;margin:0}
-header{background:#e50914;padding:20px;font-size:28px;font-weight:bold}
-.hero{padding:40px 20px}
-button{background:#e50914;color:white;border:none;padding:15px 30px;font-size:18px;border-radius:10px}
-.card{background:#1a1a1a;margin:15px;padding:20px;border-radius:15px}
+body{background:#0a0a0a;color:white;font-family:sans-serif;text-align:center}
+header{background:#e50914;padding:20px;font-size:22px;font-weight:bold}
+button{background:#e50914;color:white;border:none;padding:12px 20px;margin:5px;border-radius:8px}
+.card{background:#1a1a1a;margin:15px;padding:20px;border-radius:10px}
 </style>
 </head>
 <body>
 <header>AFROPLAY 🍿</header>
-<div class="hero">
 <h1>Watch African Movies, Series & Music</h1>
-<p>Your home for Nollywood, Afrobeats & Culture.</p>
-<button>▶ Start Watching</button>
+
+<div class="card">
+<button onclick="showSection('fan')">🎧 Fan</button>
+<button onclick="showSection('artist')">🎤 Artist</button>
+<button onclick="showSection('admin')">🔐 Admin</button>
 </div>
-<div class="card"><h2>🔥 Trending Now</h2><p>Anikulapo • King of Boys • Brotherhood</p></div>
-<div class="card"><h2>🎬 Nollywood</h2><p>Latest Nigerian Movies</p></div>
-<div class="card"><h2>🎵 Afrobeats</h2><p>Burna Boy • Wizkid • Davido • Tems</p></div>
-<p style="color:#888">© 2026 Afroplay</p>
+
+<div id="fan" class="card">
+<h2>🎧 For Fans</h2>
+<p>Listen to songs, watch videos.</p>
+<h3>Skiljoewise - Aa Jesus</h3>
+<audio controls src="aa-jesus.mp3"></audio>
+</div>
+
+<div id="artist" class="card" style="display:none">
+<h2>🎤 For Artists</h2>
+<p>Upload your song, show your music.</p>
+<button>Upload Song</button>
+</div>
+
+<div id="admin" class="card" style="display:none">
+<h2>🔐 For Admin</h2>
+<p>Welcome boss. Manage songs here.</p>
+</div>
+
+<script>
+function showSection(name){
+  if(name == 'admin'){
+    let pass = prompt("Enter Admin Password:");
+    if(pass != "Bmb@14700"){
+      alert("Wrong password!");
+      return;
+    }
+  }
+  document.getElementById('fan').style.display = 'none';
+  document.getElementById('artist').style.display = 'none';
+  document.getElementById('admin').style.display = 'none';
+  document.getElementById(name).style.display = 'block';
+}
+</script>
 </body>
 </html>
