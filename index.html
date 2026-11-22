@@ -1,95 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Afroplay - Skiljoewise</title>
-<style>
-body{margin:0;font-family:Arial;background:#000;color:#fff;padding-bottom:80px}
-.top{background:#FF0055;padding:15px;text-align:center;font-size:22px;font-weight:bold}
-.nav{display:flex;gap:8px;justify-content:center;padding:10px;background:#111;position:sticky;top:0;z-index:99}
-.nav button{background:#333;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:bold}
-.nav button.active{background:#FF0055}
-.section{padding:15px;font-weight:bold;font-size:18px}
-.card{display:flex;gap:12px;align-items:center;background:#1a1a1a;margin:10px 15px;padding:12px;border-radius:12px}
-.card img{width:70px;height:70px;border-radius:10px;object-fit:cover}
-.card h3{margin:0;font-size:17px}
-.card p{margin:4px 0;color:#aaa;font-size:13px}
-.card button{background:#FF0055;color:#fff;border:none;padding:7px 14px;border-radius:20px;font-weight:bold}
-.player{position:fixed;bottom:0;left:0;right:0;background:#111;padding:10px;text-align:center;border-top:2px solid #FF0055}
-.box{background:#1a1a1a;margin:15px;padding:15px;border-radius:12px;text-align:center}
-.box input,.box button{width:90%;padding:10px;margin:5px;border-radius:10px;border:none}
-.box button{background:#FF0055;color:#fff;font-weight:bold}
-</style>
-</head>
-<body>
-
-<div class="top">🎵 Afroplay</div>
-
-<div class="nav">
-  <button id="btn-home" class="active" onclick="showSection('home')">🏠 Home</button>
-  <button id="btn-fan" onclick="showSection('fan')">👤 Fan</button>
-  <button id="btn-artist" onclick="showSection('artist')">🎤 Artist</button>
-  <button id="btn-admin" onclick="showSection('admin')">⚙️ Admin</button>
-</div>
-
-<div id="sec-home">
-  <div class="section">🔥 Trending Now - Skiljoewise</div>
-
-  <div class="card">
-    <img src="https://via.placeholder.com/70/FF0055/ffffff?text=AJ">
-    <div style="flex:1"><h3>Aa Jesus</h3><p>Skiljoewise • Gospel</p><button onclick="playSong('Aa-Jesus.mp3','Aa Jesus')">▶ Play</button></div>
+<!-- COVER + PROFILE MENU -->
+<div style="position:relative">
+  <!-- Cover Picture -->
+  <img src="cover.jpg" onerror="this.src='https://via.placeholder.com/800x200/FF0055/ffffff?text=Afroplay+Cover'" style="width:100%;height:180px;object-fit:cover;display:block">
+  <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.8));padding:35px 15px 12px">
+    <h1 style="margin:0;font-size:26px">🎵 Afroplay</h1>
+    <p style="margin:3px 0;color:#ddd;font-size:12px">Home of Skiljoewise • Afikpo North, Ebonyi State</p>
   </div>
-
-  <div class="card">
-    <img src="https://via.placeholder.com/70/FFAA00/000000?text=OJ">
-    <div style="flex:1"><h3>Okpe Jenet</h3><p>Skiljoewise • Afrobeat</p><button onclick="playSong('Okpe-Jenet.mp3','Okpe Jenet')">▶ Play</button></div>
-  </div>
-
-  <div class="card">
-    <img src="https://via.placeholder.com/70/FF0055/ffffff?text=SC">
-    <div style="flex:1"><h3>Sweet Caro</h3><p>Skiljoewise • Afrobeat</p><button onclick="playSong('Sweet-Caro.mp3','Sweet Caro')">▶ Play</button></div>
-  </div>
-
-  <div class="card">
-    <img src="https://via.placeholder.com/70/0099FF/ffffff?text=ST">
-    <div style="flex:1"><h3>Street Commandment</h3><p>Skiljoewise • Afrobeat</p><button onclick="playSong('Street-Commandment.mp3','Street Commandment')">▶ Play</button></div>
+  <!-- Profile Picture Menu Button -->
+  <div style="position:absolute;top:12px;right:12px;text-align:right">
+    <img src="profile.jpg" onerror="this.src='https://via.placeholder.com/50/ffffff/FF0055?text=SK'" onclick="toggleProfileMenu()" style="width:48px;height:48px;border-radius:50%;border:3px solid #fff;object-fit:cover;cursor:pointer">
+    <div id="profileMenu" style="display:none;background:#1a1a1a;border-radius:12px;margin-top:5px;overflow:hidden;text-align:left;box-shadow:0 5px 20px rgba(0,0,0,0.5);min-width:160px">
+      <div onclick="showSection('artist');toggleProfileMenu()" style="padding:12px;border-bottom:1px solid #333;cursor:pointer">👤 My Profile<br><span style="color:#aaa;font-size:11px">Skiljoewise</span></div>
+      <div onclick="showSection('fan');toggleProfileMenu()" style="padding:12px;border-bottom:1px solid #333;cursor:pointer">❤️ My Fan Club</div>
+      <div onclick="showSection('admin');toggleProfileMenu()" style="padding:12px;border-bottom:1px solid #333;cursor:pointer">⚙️ Settings</div>
+      <div onclick="toggleProfileMenu();alert('You have logged out')" style="padding:12px;cursor:pointer;color:#ff5555">🚪 Logout</div>
+    </div>
   </div>
 </div>
-
-<div id="sec-fan" style="display:none">
-  <div class="box"><h2>👤 Fan Zone</h2><p>Welcome Fan! Listen to Skiljoewise songs, like and share.</p><p>4 Songs Available</p></div>
-  <div class="box"><h3>Join as Fan</h3><input placeholder="Your Name"><input placeholder="Your WhatsApp Number"><button>Join Fan Club</button></div>
-</div>
-
-<div id="sec-artist" style="display:none">
-  <div class="box"><h2>🎤 Skiljoewise</h2><p>Afrobeat / Gospel Artist</p><p>From Port Harcourt, Nigeria</p><p><b>4 Songs on Afroplay</b></p><p>Aa Jesus • Okpe Jenet • Sweet Caro • Street Commandment</p></div>
-</div>
-
-<div id="sec-admin" style="display:none">
-  <div class="box"><h2>⚙️ Admin Login</h2><input placeholder="Username - desaddest"><input type="password" placeholder="Password"><button>Login</button><p style="color:#aaa;font-size:12px">Admin: desaddest</p></div>
-</div>
-
-<div class="player">
-  <div id="nowPlaying">🎵 Choose a song to play</div>
-  <audio id="audio" controls style="width:100%;margin-top:5px"></audio>
-</div>
-
 <script>
-function showSection(name){
-  document.getElementById('sec-home').style.display='none';
-  document.getElementById('sec-fan').style.display='none';
-  document.getElementById('sec-artist').style.display='none';
-  document.getElementById('sec-admin').style.display='none';
-  document.getElementById('sec-'+name).style.display='block';
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('btn-'+name).classList.add('active');
-}
-function playSong(file, title){
-  document.getElementById('nowPlaying').innerText='▶ Now Playing: '+title+' - Skiljoewise';
-  var a=document.getElementById('audio');
-  a.src=file;
-  a.play();
+function toggleProfileMenu(){
+  var m=document.getElementById('profileMenu');
+  m.style.display = m.style.display==='none' || m.style.display==='' ? 'block':'none';
 }
 </script>
-</body>
-</html>
