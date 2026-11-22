@@ -21,11 +21,6 @@ body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;padding-bottom:90p
 .card h3{margin:0;font-size:16px}
 .card p{margin:3px 0;color:#aaa;font-size:12px}
 .card .play{margin-left:auto;background:#FF0055;color:#fff;border:none;width:40px;height:40px;border-radius:50%;font-size:16px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:10px 15px}
-.grid .gcard{background:#1a1a1a;border-radius:12px;padding:10px;text-align:center}
-.grid .gcard img{width:100%;height:110px;object-fit:cover;border-radius:10px}
-.grid .gcard h4{margin:8px 0 2px;font-size:14px}
-.grid .gcard p{margin:0;color:#aaa;font-size:11px}
 .box{background:#1a1a1a;margin:15px;padding:18px;border-radius:15px;text-align:center}
 .box input{width:90%;padding:11px;margin:6px;border-radius:10px;border:none;background:#222;color:#fff}
 .box button{background:#FF0055;color:#fff;border:none;padding:11px 20px;border-radius:20px;font-weight:bold;width:90%;margin-top:8px}
@@ -37,7 +32,6 @@ body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;padding-bottom:90p
 </head>
 <body>
 
-<!-- COVER + PROFILE -->
 <div style="position:relative;width:100%;height:180px;background:linear-gradient(135deg,#FF0055,#7a00ff);overflow:hidden">
   <img src="cover.jpg" onerror="this.style.display='none'" style="width:100%;height:180px;object-fit:cover;display:block">
   <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.85));padding:40px 15px 12px">
@@ -64,7 +58,6 @@ body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;padding-bottom:90p
   <button id="btn-admin" onclick="showSection('admin')">⚙️ Admin</button>
 </div>
 
-<!-- HOME -->
 <div id="sec-home">
   <div class="hero">
     <img src="profile.jpg" onerror="this.src='https://via.placeholder.com/90/ffffff/FF0055?text=SK'">
@@ -79,11 +72,9 @@ body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;padding-bottom:90p
   </div>
 </div>
 
-<!-- FAN + PAYMENT -->
 <div id="sec-fan" style="display:none">
   <div class="box"><h2>👤 Fan Zone</h2><p id="fanWelcome">Welcome Fan! You are part of Skiljoewise family.</p><p>🎵 4 Songs • ❤️ Like • 📤 Share</p></div>
   <div class="box"><h3>Join Fan Club</h3><input id="fanName" placeholder="Your Name"><input id="fanPhone" placeholder="WhatsApp Number e.g 0803..."><button onclick="joinFan()">Join Now - WhatsApp</button><p id="fanMsg" style="color:#00ff88;font-size:13px"></p></div>
-
   <div class="box" id="payBox" style="border:2px solid #FFD700">
     <h2>💖 Support Skiljoewise</h2>
     <p>Love the music? Support the artist to make more songs!</p>
@@ -96,15 +87,9 @@ body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;padding-bottom:90p
     <button onclick="payWithPaystack()" style="background:#00C3A5">💳 Support Now - Pay With Paystack<br><span style="font-size:11px">Card / Bank Transfer / Opay / USSD</span></button>
     <p id="payMsg" style="color:#00ff88"></p>
     <hr style="border:1px solid #333;margin:12px 0">
-    <h3>🏦 Or Pay Direct - Bank Transfer</h3>
-    <p style="background:#222;padding:12px;border-radius:10px;line-height:1.8">
-      <b>Bank:</b> Opay Digital Bank<br>
-      <b>Account Number:</b> <span id="acctNum">1234567890</span> <button onclick="copyAcct()" style="width:auto;padding:4px 10px;font-size:11px;background:#FFD700;color:#000">Copy</button><br>
-      <b>Account Name:</b> Skiljoewise
-    </p>
-    <button onclick="sendReceipt()" style="background:#25D366">📱 I Don Pay - Send Receipt on WhatsApp</button>
+    <p style="color:#aaa;font-size:12px">After you pay, send receipt on WhatsApp</p>
+    <button onclick="sendReceipt()" style="background:#25D366">📱 I Don Pay - Send Receipt on WhatsApp<br>07037938492</button>
   </div>
-
   <div class="box">
     <h3>🛒 Buy Song - ₦500 Only</h3>
     <p>Buy any song to support Skiljoewise</p>
@@ -115,7 +100,6 @@ body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;padding-bottom:90p
   </div>
 </div>
 
-<!-- ARTIST + LOGIN + UPLOAD -->
 <div id="sec-artist" style="display:none">
   <div class="box"><img src="profile.jpg" onerror="this.src='https://via.placeholder.com/100/FF0055/ffffff?text=SK'" style="width:100px;height:100px;border-radius:50%;object-fit:cover"><h2>🎤 Skiljoewise</h2><p>Afrobeat / Gospel Artist</p><p>From Afikpo North, Ebonyi State, Nigeria</p><p><b>4 Songs on Afroplay</b></p><p>Aa Jesus • Okpe Jenet • Sweet Caro • Street Commandment</p><button onclick="showSection('home')">▶ Listen Now</button><button onclick="followArtist()" style="background:#222;margin-top:8px">➕ Follow Artist</button><p id="followMsg" style="color:#00ff88"></p>
   <hr style="border:1px solid #333;margin:15px 0">
@@ -151,7 +135,6 @@ body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;padding-bottom:90p
   </div>
 </div>
 
-<!-- ADMIN -->
 <div id="sec-admin" style="display:none">
   <div class="box" id="adminLoginBox"><h2>⚙️ Admin Login</h2><input id="adminUser" placeholder="Username - desaddest"><input id="adminPass" type="password" placeholder="Password - afroplay123"><button onclick="adminLogin()">Login</button><p style="color:#aaa;font-size:12px">Admin: desaddest<br>Password: afroplay123</p><p id="adminMsg" style="color:#ff5555"></p></div>
   <div class="box" id="adminDashboard" style="display:none"><h2>✅ Welcome Admin desaddest!</h2><p>You are logged in.</p><p>🎵 Total Songs: 4<br>👤 Artist: Skiljoewise<br>📍 Afikpo North, Ebonyi State</p><button onclick="showSection('home')">Go To Home</button><button onclick="adminLogout()" style="background:#222">Logout</button></div>
@@ -163,9 +146,8 @@ body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;padding-bottom:90p
 </div>
 
 <script>
-// ==== CHANGE THIS TO YOUR REAL PAYSTACK LINK ====
-var PAYSTACK_LINK='https://paystack.com/pay/YOUR-LINK-HERE';
-var WHATSAPP_NUMBER='2340000000000';
+var PAYSTACK_LINK='https://paystack.shop/pay/036ho09gsj';
+var WHATSAPP_NUMBER='2347037938492';
 function toggleProfileMenu(){var m=document.getElementById('profileMenu');m.style.display=m.style.display==='block'?'none':'block';}
 function showSection(name){['home','fan','artist','admin'].forEach(n=>{document.getElementById('sec-'+n).style.display=n===name?'block':'none';document.getElementById('btn-'+n).classList.toggle('active',n===name);});window.scrollTo(0,0);}
 function playSong(file,title){document.getElementById('nowPlaying').innerText='▶ '+title+' - Skiljoewise';var a=document.getElementById('audio');a.src=file;a.play();}
@@ -176,19 +158,16 @@ function joinFan(){var name=document.getElementById('fanName').value;if(!name){a
 function followArtist(){document.getElementById('followMsg').innerText='✅ You are now following Skiljoewise!';alert('You are now following Skiljoewise ✅');}
 function adminLogin(){var u=document.getElementById('adminUser').value;var p=document.getElementById('adminPass').value;if(u==='desaddest' && p==='afroplay123'){document.getElementById('adminLoginBox').style.display='none';document.getElementById('adminDashboard').style.display='block';}else{document.getElementById('adminMsg').innerText='❌ Wrong username or password. Try desaddest / afroplay123';}}
 function adminLogout(){document.getElementById('adminLoginBox').style.display='block';document.getElementById('adminDashboard').style.display='none';}
-// ARTIST
 function showArtistLogin(){document.getElementById('artistLoginBox').style.display='block';document.getElementById('artistSignupBox').style.display='none';}
 function showArtistSignup(){document.getElementById('artistSignupBox').style.display='block';document.getElementById('artistLoginBox').style.display='none';}
 function artistSignup(){var name=document.getElementById('newArtistName').value;var state=document.getElementById('newArtistState').value;if(!name){alert('Please type your Stage Name');return;}localStorage.setItem('afroplay_artist',name);document.getElementById('artistSignupMsg').innerText='✅ Welcome '+name+'! Your Artist Account don create. Now Login.';document.getElementById('artistDashName').innerText='Welcome '+name+' from '+state+'!';alert('Welcome '+name+'! You are now an Afroplay Artist ✅');}
 function artistLogin(){var name=document.getElementById('artistLoginName').value;if(!name){alert('Please type your Stage Name');return;}document.getElementById('artistDashName').innerText='Welcome '+name+'!';document.getElementById('artistLoginBox').style.display='none';document.getElementById('artistDashboard').style.display='block';}
 function artistLogout(){document.getElementById('artistDashboard').style.display='none';document.getElementById('artistLoginBox').style.display='none';alert('Artist logged out');}
 function uploadArtistSong(){var title=document.getElementById('uploadSongName').value;var file=document.getElementById('uploadSongFile').files[0];if(!title){alert('Please type Song Title first');return;}if(!file){alert('Please pick MP3 file first');return;}var url=URL.createObjectURL(file);var list=document.getElementById('songList');var div=document.createElement('div');div.className='card';div.setAttribute('data-name',title.toLowerCase());div.innerHTML='<img src="https://via.placeholder.com/60/00AA55/ffffff?text=NEW"><div style="flex:1"><h3>'+title+'</h3><p>New Artist • Afrobeat • Just Now</p><div><button class="smallBtn" onclick="likeSong(this)">❤️ Like</button> <button class="smallBtn" onclick="shareSong(\''+title+'\')">📤 Share</button> <button class="smallBtn" onclick="buySong(\''+title+'\')" style="background:#FFD700!important;color:#000!important">🛒 Buy ₦500</button></div></div><button class="play" onclick="playSong(\''+url+'\',\''+title+'\')">▶</button>';list.appendChild(div);document.getElementById('uploadMsg').innerText='✅ '+title+' don upload! Go Home, you go see am.';alert('✅ '+title+' don upload! Go Home and play am.');showSection('home');}
-// PAYSTACK + PAYMENT
 function supportAmount(amt){document.getElementById('supportCustom').value=amt;document.getElementById('payMsg').innerText='You choose ₦'+amt+' - Press Support Now below';}
-function payWithPaystack(){var amt=document.getElementById('supportCustom').value||500;if(PAYSTACK_LINK.includes('YOUR-LINK-HERE')){alert('Paystack link never set yet! Send your Paystack link to Skiljoewise to activate payment. For now, use Bank Transfer below.');return;}window.open(PAYSTACK_LINK,'_blank');document.getElementById('payMsg').innerText='Paystack don open for ₦'+amt+' - Pay with Card / Transfer / Opay';}
-function copyAcct(){var t=document.getElementById('acctNum').innerText;navigator.clipboard.writeText(t);alert('Account Number Copied: '+t);}
+function payWithPaystack(){var amt=document.getElementById('supportCustom').value||500;window.open(PAYSTACK_LINK,'_blank');document.getElementById('payMsg').innerText='Paystack don open for ₦'+amt+' - Pay with Card / Transfer / Opay';}
 function sendReceipt(){window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent('Hello Skiljoewise! I don support you on Afroplay. I don send money, here is my receipt.'),'_blank');}
-function buySong(title){if(PAYSTACK_LINK.includes('YOUR-LINK-HERE')){if(confirm('Buy '+title+' for ₦500?\n\nPaystack never set yet. Press OK to pay with Bank Transfer / WhatsApp.')){window.open('https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent('Hello Skiljoewise! I want to BUY '+title+' for ₦500 on Afroplay.'),'_blank');}return;}if(confirm('Buy '+title+' for ₦500 with Paystack?\n\nYou fit pay with Card / Bank Transfer / Opay. Press OK to pay.')){window.open(PAYSTACK_LINK,'_blank');}}
+function buySong(title){if(confirm('Buy '+title+' for ₦500 with Paystack?\n\nYou fit pay with Card / Bank Transfer / Opay. Press OK to pay.')){window.open(PAYSTACK_LINK,'_blank');}}
 </script>
 </body>
 </html>
