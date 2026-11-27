@@ -40,59 +40,10 @@ body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;padding-bottom:90p
 <div style=...
 <div style="position:relative;width:100%;height:180px;background:linear-gradient(135deg,#FF0055,#7a00ff);overflow:hidden">
   <img src="cover.jpg" onerror="this.style.display='none'" style="width:100%;height:180px;object-fit:cover;display:block">
-  <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.85));padding:40px 15px 12px">
-    <h1 style="margin:0;font-size:26px">🎵 Afroplay</h1>
-    <p style="margin:3px 0;color:#ddd;font-size:12px">Home of Skiljoewise • Afikpo North, Ebonyi State</p>
-  </div>
-  <div style="position:absolute;top:12px;right:12px;text-align:right;z-index:10">
-    <img src="profile.jpg" onerror="this.src='https://via.placeholder.com/50/ffffff/FF0055?text=SK'" onclick="toggleProfileMenu()" style="width:48px;height:48px;border-radius:50%;border:3px solid #fff;object-fit:cover;cursor:pointer;background:#fff">
-    <div id="profileMenu" style="display:none;background:#1a1a1a;border-radius:12px;margin-top:5px;overflow:hidden;text-align:left;box-shadow:0 5px 20px rgba(0,0,0,0.5);min-width:160px">
-      <div onclick="showSection('artist');toggleProfileMenu()" style="padding:12px;border-bottom:1px solid #333;cursor:pointer">👤 My Profile<br><span style="color:#aaa;font-size:11px">Skiljoewise</span></div>
-      <div onclick="showSection('fan');toggleProfileMenu()" style="padding:12px;border-bottom:1px solid #333;cursor:pointer">❤️ My Fan Club</div>
-      <div onclick="showSection('admin');toggleProfileMenu()" style="padding:12px;border-bottom:1px solid #333;cursor:pointer">⚙️ Settings</div>
-      <div onclick="toggleProfileMenu();alert('You have logged out')" style="padding:12px;cursor:pointer;color:#ff5555">🚪 Logout</div>
-    </div>
-  </div>
-</div>
-
-<div class="search"><span>🔍</span><input id="searchInput" placeholder="Search songs, artist..." oninput="searchSongs()"></div>
-
-<div class="nav">
-  <button id="btn-home" class="active" onclick="showSection('home')">🏠 Home</button>
-  <button id="btn-fan" onclick="showSection('fan')">👤 Fan</button>
-  <button id="btn-artist" onclick="showSection('artist')">🎤 Artist</button>
-  <button id="btn-admin" onclick="showSection('admin')">⚙️ Admin</button>
-</div>
-
-<div id="sec-home">
-  <div class="hero">
-    <img src="profile.jpg" onerror="this.src='https://via.placeholder.com/90/ffffff/FF0055?text=SK'">
-    <div><h2>Skiljoewise</h2><p>New Album • 4 Songs Out Now</p><button onclick="playSong('Aa-Jesus.mp3','Aa Jesus')">▶ Play All</button> <button onclick="showSection('fan')" style="background:#FFD700;color:#000">💖 Support</button></div>
-  </div>
-  <div class="title">🔥 Trending Now</div>
-  <div id="songList">
-    <div class="card" data-name="aa jesus"><img src="https://via.placeholder.com/60/FF0055/ffffff?text=AJ"><div style="flex:1"><h3>Aa Jesus</h3><p>Skiljoewise • Gospel • 2026</p><div><button class="smallBtn" onclick="likeSong(this)">❤️ Like</button> <button class="smallBtn" onclick="shareSong('Aa Jesus')">📤 Share</button> <button class="smallBtn" onclick="buySong('Aa Jesus')" style="background:#FFD700!important;color:#000!important">🛒 Buy ₦500</button></div></div><button class="play" onclick="playSong('Aa-Jesus.mp3','Aa Jesus')">▶</button></div>
-    <div class="card" data-name="okpe jenet"><img src="https://via.placeholder.com/60/FFAA00/000000?text=OJ"><div style="flex:1"><h3>Okpe Jenet</h3><p>Skiljoewise • Afrobeat • 2026</p><div><button class="smallBtn" onclick="likeSong(this)">❤️ Like</button> <button class="smallBtn" onclick="shareSong('Okpe Jenet')">📤 Share</button> <button class="smallBtn" onclick="buySong('Okpe Jenet')" style="background:#FFD700!important;color:#000!important">🛒 Buy ₦500</button></div></div><button class="play" onclick="playSong('Okpe-Jenet.mp3','Okpe Jenet')">▶</button></div>
-    <div class="card" data-name="sweet caro"><img src="https://via.placeholder.com/60/FF0055/ffffff?text=SC"><div style="flex:1"><h3>Sweet Caro</h3><p>Skiljoewise • Afrobeat • 2026</p><div><button class="smallBtn" onclick="likeSong(this)">❤️ Like</button> <button class="smallBtn" onclick="shareSong('Sweet Caro')">📤 Share</button> <button class="smallBtn" onclick="buySong('Sweet Caro')" style="background:#FFD700!important;color:#000!important">🛒 Buy ₦500</button></div></div><button class="play" onclick="playSong('Sweet-Caro.mp3','Sweet Caro')">▶</button></div>
-    <div class="card" data-name="street commandment"><img src="https://via.placeholder.com/60/0099FF/ffffff?text=ST"><div style="flex:1"><h3>Street Commandment</h3><p>Skiljoewise • Afrobeat • 2026</p><div><button class="smallBtn" onclick="likeSong(this)">❤️ Like</button> <button class="smallBtn" onclick="shareSong('Street Commandment')">📤 Share</button> <button class="smallBtn" onclick="buySong('Street Commandment')" style="background:#FFD700!important;color:#000!important">🛒 Buy ₦500</button></div></div><button class="play" onclick="playSong('Street-Commandment.mp3','Street Commandment')">▶</button></div>
-  </div>
-</div>
-
-<div id="sec-fan" style="display:none">
-  <div class="box"><h2>👤 Fan Zone</h2><p id="fanWelcome">Welcome Fan! You are part of Skiljoewise family.</p><p>🎵 4 Songs • ❤️ Like • 📤 Share</p></div>
-  <div class="box"><h3>Join Fan Club</h3><input id="fanName" placeholder="Your Name"><input id="fanPhone" placeholder="WhatsApp Number e.g 0803..."><button onclick="joinFan()">Join Now - WhatsApp</button><p id="fanMsg" style="color:#00ff88;font-size:13px"></p></div>
-  <div class="box" id="payBox" style="border:2px solid #FFD700">
-    <h2>💖 Support Skiljoewise</h2>
-    <p>Love the music? Support the artist to make more songs!</p>
-    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-      <button onclick="supportAmount(500)" style="width:28%;background:#222">₦500</button>
-      <button onclick="supportAmount(1000)" style="width:28%;background:#222">₦1,000</button>
-      <button onclick="supportAmount(5000)" style="width:28%;background:#222">₦5,000</button>
-    </div>
-    <input id="supportCustom" type="number" placeholder="Or type any amount e.g. 2000">
-    <button onclick="payWithPaystack()" style="background:#00C3A5">💳 Support Now - Pay With Paystack<br><span style="font-size:11px">Card / Bank Transfer / Opay / USSD</span></button>
+  <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.85));padding:40px 15px 12p    <button onclick="payWithPaystack()" style="background:#00C3A5">💳 Support Now - Pay With Paystack<br><span style="font-size:11px">Card / Bank Transfer / Opay / USSD</span></button>
     <p id="payMsg" style="color:#00ff88"></p>
-    <hr style="border:1px solid #333;margin:12px 0">
+    <hr style="border:1px solid #333;margin:12px 0">style="margin:0;font-size:26px">🎵 Afroplay</h1>
+    <p imargin:3px 0;color:#ddd
     <p style="color:#aaa;font-size:12px">After you pay, send receipt on WhatsApp</p>
     <button onclick="sendReceipt()" style="background:#25D366">📱 I Don Pay - Send Receipt on WhatsApp<br>07037938492</button>
   </div>
